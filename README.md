@@ -13,4 +13,4 @@ requirements for apis
 - openapi spec generator
 - logging (preferrably struct logs)
 - swagger or openapi ui
-- concurrency / async models
+- concurrency / async implementations ? (tokio vs other setups?)
