@@ -1,0 +1,13 @@
+FROM rust:1.79-slim-bookworm as base
+
+RUN apt update && apt upgrade -y
+
+FROM base as builder
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN cargo install --path .
+
+CMD ["bash"]
