@@ -1,5 +1,6 @@
 target
 .cargo
+.gitignore
 **/*.sh
 **/*.tar.gz
 **/*.git*
