@@ -22,33 +22,21 @@ requirements for apis
   - alpine image?
     - what is the smallest docker base image?
 
-```dockerfile
-FROM rust:1.79-slim-bookworm as base
+## Run Locally
 
-RUN apt update && apt upgrade -y
-
-FROM base as builder
-
-EXPOSE 8080
-
-WORKDIR /usr/src/app
-
-COPY . .
-
-RUN cargo build --release
-
-CMD ["bash"]
-```
-
-```.dockerignore
-target
-.cargo
-**/*.sh
-**/*.tar.gz
-**/*.git*
-```
+Need cargo and/or docker
 
 ```sh
 docker build -t app-name .
 docker run -it --rm app-name
+```
+
+## Benchmarking
+
+```sh
+# Need wrk package
+brew install wrk
+
+# Run against apis
+wrk -t4 -d30s --latecy http://127.0.0.1:8080
 ```
