@@ -40,3 +40,19 @@ brew install wrk
 # Run against apis
 wrk -t4 -d30s --latecy http://127.0.0.1:8080
 ```
+
+## New Idea
+
+Build standard todo app crud api.
+
+Standardize endpoints and I/O contracts for APIs.
+
+Make Docker images for all APIs.
+
+Deploy to k3p4 Raspberry Pi Cluster (k3s host).
+
+Use Ansible to automate setup and deployments.
+
+???
+
+PROFIT! 🤣
