@@ -12,6 +12,7 @@ COPY . .
 
 RUN cargo build --release
 
+#########################
 FROM debian:bookworm-slim
 
 COPY --from=builder /app/target/release/actix-web-api /usr/local/bin/atxapi
