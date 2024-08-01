@@ -4,3 +4,4 @@ target
 **/*.sh
 **/*.tar.gz
 **/*.git*
+dockerfile

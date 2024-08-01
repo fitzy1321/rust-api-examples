@@ -27,8 +27,15 @@ requirements for apis
 Need cargo and/or docker
 
 ```sh
-docker build -t app-name .
-docker run -it --rm app-name
+## Build images
+docker build -t actix-web:latest actix-web-api/.
+docker build -t axum:latest axum-api/.
+docker build -t rocket:latest rocket-api/.
+```
+
+```sh
+## Run images with ports exposed
+docker run -it --rm -p 8000:8000 rocket:latest
 ```
 
 ## Benchmarking
