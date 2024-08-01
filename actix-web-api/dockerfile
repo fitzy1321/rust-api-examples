@@ -1,13 +1,19 @@
-FROM rust:1.79-slim-bookworm as base
+FROM rust:1.80-slim-bookworm AS base
 
-RUN apt update && apt upgrade -y
+RUN apt-get update && apt-get upgrade -y && \
+    rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
+####################
 FROM base as builder
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY . .
 
-RUN cargo install --path .
+RUN cargo build --release
 
-CMD ["bash"]
+FROM debian:bookworm-slim
+
+COPY --from=builder /app/target/release/actix-web-api /usr/local/bin/atxapi
+
+ENTRYPOINT ["atxapi"]

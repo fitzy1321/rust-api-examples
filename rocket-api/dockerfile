@@ -1,21 +1,24 @@
-FROM rust:1.79 as base
+FROM rust:1.80-slim-bookworm AS base
 
-RUN apt update && apt upgrade -y
+RUN apt-get update && apt-get upgrade -y && \
+    rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
-FROM base as builder
+####################
+FROM base AS builder
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY . .
 
-RUN cargo install --path .
+RUN cargo build --release
 
-FROM debian:bookworm-slim as runner
+#########################
+FROM debian:bookworm-slim
 
-COPY --from=builder /usr/local/cargo/bin/rocket-api /usr/local/bin/rocket-api
+COPY --from=builder /app/target/release/rocket-api /usr/local/bin/rapi
 
 ENV ROCKET_ADDRESS=0.0.0.0 ROCKET_PORT=8000
 
 EXPOSE ${ROCKET_PORT}
 
-CMD ["rocket-api"]
+ENTRYPOINT ["rapi"]
